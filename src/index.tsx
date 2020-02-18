@@ -9,7 +9,8 @@
 
 import React from 'react';
 import {render} from 'react-dom';
+import App from './componentns/App';
 
 import 'bootstrap/scss/bootstrap.scss';
 
-render(<></>, document.getElementById('main'));
+render(<App/>, document.getElementById('main'));
