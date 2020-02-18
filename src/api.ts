@@ -9,8 +9,17 @@
 
 import axios from 'axios';
 
+
+export interface UsersOptions {
+    query: string
+    limit: number
+    offset: number
+    sortKey: string
+    sortDirection: string
+}
+
 export interface Response {
-    total: number,
+    total: number
     items: {
         id: number
         name: string
@@ -18,24 +27,16 @@ export interface Response {
     }[]
 }
 
-export interface UsersParams {
-    query: string
-    queryColumn: string
-    sortKey: string
-    sortDirection: string
-    limit: number
-    offset: number
-}
-
 const API_KEY = 'super_secret_api_key';
+const URL = 'https://mic.erak.zaruba-ondrej.dev/users';
 
-export const getUsers = async (params: Partial<UsersParams>) => {
-    const result = await axios.get<Response>('https://mic.erak.zaruba-ondrej.dev/users', {
+export const getUsers = async (options: Partial<UsersOptions>): Promise<Response> => {
+    const response = await axios.get(URL, {
         params: {
-            ...params,
+            ...options,
             apiKey: API_KEY
         }
     });
 
-    return result.data;
+    return response.data;
 };

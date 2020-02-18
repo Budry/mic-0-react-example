@@ -9,26 +9,25 @@
 
 import * as React from 'react';
 import {FunctionComponent} from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 interface PaginationProps {
-    currentPage: number
     limit: number
-    totalItems: number
-    onChangePage: (page: number) => void
+    total: number
+    currentPage: number
+    onPageChange: (page: number) => void
 }
 
-const Pagination: FunctionComponent<PaginationProps> = ({onChangePage, limit, currentPage, totalItems}) => {
+const Pagination: FunctionComponent<PaginationProps> = ({limit, total, onPageChange, currentPage}) => {
 
-    const pages= [];
-    for (let page = 1; page <= Math.ceil(totalItems / limit); page++) {
+    const pages = [];
+    for (let page = 1; page <= Math.ceil(total / limit); page++) {
         pages.push(page);
     }
 
-    const createPageHandler = (page: number) => {
+    const createClickHandler = (page: number) => {
         return (e: React.MouseEvent) => {
-            e.preventDefault();
-            onChangePage(page);
+            onPageChange(page)
         }
     };
 
@@ -37,8 +36,8 @@ const Pagination: FunctionComponent<PaginationProps> = ({onChangePage, limit, cu
             <ul className="pagination">
                 {pages.map((page) => {
                     return (
-                        <li className={classNames("page-item", {'active': page === currentPage})}>
-                            <a className="page-link" href="#" onClick={createPageHandler(page)}>
+                        <li className={classnames('page-item', {active: currentPage === page})} key={page}>
+                            <a className="page-link" href="#" onClick={createClickHandler(page)}>
                                 {page}
                             </a>
                         </li>

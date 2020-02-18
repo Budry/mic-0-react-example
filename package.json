@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "yarn webpack -c webpack.config.js --watch"
+  },
   "devDependencies": {
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
